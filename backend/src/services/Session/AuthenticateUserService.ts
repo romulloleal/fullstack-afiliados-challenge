@@ -5,6 +5,7 @@ import AppError from '@errors/AppError'
 
 import User from '@entities/User'
 import CreateAccessTokenService from './CreateAccessTokenService'
+import CreateRefreshTokenService from './CreateRefreshTokenService'
 
 interface Request {
   email: string
@@ -20,6 +21,7 @@ interface AutenticatedUser {
 interface Response {
   user: AutenticatedUser
   accessToken: string
+  refreshToken: string
 }
 
 class AuthenticateUserService {
@@ -43,6 +45,9 @@ class AuthenticateUserService {
     const createAccessTokenService = new CreateAccessTokenService()
     const accessToken = await createAccessTokenService.execute(user.id)
 
+    const createRefreshTokenService = new CreateRefreshTokenService()
+    const refreshToken = await createRefreshTokenService.execute(user.id)
+
     return {
       user: {
         id: user.id,
@@ -50,6 +55,7 @@ class AuthenticateUserService {
         email: user.email,
       },
       accessToken,
+      refreshToken,
     }
   }
 }
