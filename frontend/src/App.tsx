@@ -1,7 +1,13 @@
 import React from 'react'
 
-const App = () => {
-  return <h1>Hello World!</h1>
-}
+import { BrowserRouter } from 'react-router-dom'
 
-export default App
+import { Routes } from './routes'
+
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  )
+}
