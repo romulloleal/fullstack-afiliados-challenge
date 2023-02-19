@@ -6,13 +6,19 @@
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules ./src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "migration:run": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/database/index.ts migration:run",
+    "seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/database/index.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
-    "express-async-errors": "^3.1.1"
+    "express-async-errors": "^3.1.1",
+    "pg": "^8.9.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.12",
+    "typeorm-extension": "^2.5.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",

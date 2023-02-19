@@ -1,3 +1,5 @@
+import 'reflect-metadata'
+
 import * as dotenv from 'dotenv'
 dotenv.config()
 
@@ -8,6 +10,8 @@ import 'express-async-errors'
 import cors from 'cors'
 
 import AppError from './errors/AppError'
+
+import './database'
 
 const app = express()
 
