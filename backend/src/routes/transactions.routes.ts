@@ -28,8 +28,6 @@ transactionsRouter.get(
   '/getTransactionsBalance',
   multer.single,
   async (request, response) => {
-    const { page, size } = request.query
-
     const getTransactionsBalance = new GetTransactionsBalanceService()
     const balance = await getTransactionsBalance.execute()
 
@@ -56,6 +54,7 @@ transactionsRouter.post(
 
     return response.json({
       status: 'success',
+      message: 'Arquivo enviado com sucesso!',
       transactions,
     })
   }
