@@ -4,6 +4,7 @@ import multer from '@config/upload'
 import AppError from '@errors/AppError'
 import CreateTransactionsService from '@services/Transactions/CreateTransactionsService'
 import GetTransactionsService from '@services/Transactions/GetTransactionsService'
+import GetTransactionsBalanceService from '@services/Transactions/GetTransactionsBalanceService'
 
 const transactionsRouter = Router()
 
@@ -22,6 +23,22 @@ transactionsRouter.get('/', multer.single, async (request, response) => {
     transactions,
   })
 })
+
+transactionsRouter.get(
+  '/getTransactionsBalance',
+  multer.single,
+  async (request, response) => {
+    const { page, size } = request.query
+
+    const getTransactionsBalance = new GetTransactionsBalanceService()
+    const balance = await getTransactionsBalance.execute()
+
+    return response.json({
+      status: 'success',
+      balance,
+    })
+  }
+)
 
 // create transactions by file upload
 transactionsRouter.post(
