@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  postgres:
+    container_name: db_afiliados
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=docker
+      - POSTGRESQL_DATABASE=afiliados
+    ports:
+      - "5432:5432"
+    networks:
+      - afiliados-network
+
+  api:
+    container_name: api_afiliados
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    command: sh -c "npm run migration:run && npm run seed  && npm run dev:server"
+    ports:
+      - "3333:3333"
+    volumes:
+      - ./backend/src:/home/api/src
+    networks:
+    - afiliados-network
+
+  web:
+    container_name: web_afiliados
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/home/web/src
+    stdin_open: true
+    networks:
+      - afiliados-network
+
+networks:
+  afiliados-network:
+    driver: bridge
