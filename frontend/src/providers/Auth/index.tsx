@@ -24,7 +24,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   })
 
   const signUp = async (name: string, email: string, password: string) => {
-    await api.post('/user/crateAccount', {
+    await api.post('/users/createUser', {
       name,
       email,
       password,
