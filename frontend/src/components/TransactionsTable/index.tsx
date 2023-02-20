@@ -1,7 +1,7 @@
 import { ITransaction } from '~/interfaces/ITransaction'
 import { Container, DataBox, DataTable } from './style'
 
-const MockData: ITransaction[] = [
+const transactions: ITransaction[] = [
   {
     id: '57d9d40d-70fd-4cff-af71-b841bcf3a252',
     type: 2,
@@ -45,21 +45,28 @@ export const TransactionsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {MockData.map((item) => (
-            <tr key={item.id}>
-              <td>{item.sellerName}</td>
-              <td>{item.product}</td>
-              <td>{item.transactionType.description}</td>
+          {transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.sellerName}</td>
+              <td>{transaction.product}</td>
+              <td>{transaction.transactionType.description}</td>
               <td
                 className={`${
-                  item.transactionType.nature === 'Entrada'
+                  transaction.transactionType.nature === 'Entrada'
                     ? 'income'
                     : 'outcome'
                 }`}
               >
-                {item.price}
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(transaction.price / 100)}
               </td>
-              <td>{item.saleDate}</td>
+              <td>
+                {new Intl.DateTimeFormat('pt-BR').format(
+                  new Date(transaction.saleDate)
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -67,37 +74,44 @@ export const TransactionsTable = () => {
 
       {/* display when scren has less than 700px */}
       <DataBox>
-        {MockData.map((item) => (
+        {transactions.map((transaction) => (
           <div className='transaction'>
             <div className='row'>
               <span className='title'>Produto:</span>
-              <span className='description'>{item.product}</span>
+              <span className='description'>{transaction.product}</span>
             </div>
             <div className='row'>
               <span className='title'>Vendedor:</span>
-              <span className='description'>{item.sellerName}</span>
+              <span className='description'>{transaction.sellerName}</span>
             </div>
             <div className='row'>
               <span className='title'>Tipo:</span>
               <span className='description'>
-                {item.transactionType.description}
+                {transaction.transactionType.description}
               </span>
             </div>
             <div className='row'>
               <span className='title'>Valor:</span>
               <span
                 className={`description ${
-                  item.transactionType.nature === 'Entrada'
+                  transaction.transactionType.nature === 'Entrada'
                     ? 'income'
                     : 'outcome'
                 }`}
               >
-                {item.price}
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(transaction.price / 100)}
               </span>
             </div>
             <div className='row'>
               <span className='title'>Data:</span>
-              <span className='description'>{item.saleDate}</span>
+              <span className='description'>
+                {new Intl.DateTimeFormat('pt-BR', {}).format(
+                  new Date(transaction.saleDate)
+                )}
+              </span>
             </div>
           </div>
         ))}
