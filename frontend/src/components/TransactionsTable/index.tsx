@@ -1,4 +1,5 @@
 import { ITransaction } from '~/interfaces/ITransaction'
+
 import { Container, DataBox, DataTable } from './style'
 
 const transactions: ITransaction[] = [
@@ -75,7 +76,7 @@ export const TransactionsTable = () => {
       {/* display when scren has less than 700px */}
       <DataBox>
         {transactions.map((transaction) => (
-          <div className='transaction'>
+          <div className='transaction' key={transaction.id}>
             <div className='row'>
               <span className='title'>Produto:</span>
               <span className='description'>{transaction.product}</span>
