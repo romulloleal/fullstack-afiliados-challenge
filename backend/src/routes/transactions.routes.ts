@@ -13,7 +13,7 @@ transactionsRouter.get('/', multer.single, async (request, response) => {
   const { page, size } = request.query
 
   const getTransactions = new GetTransactionsService()
-  const transactions = await getTransactions.execute({
+  const { transactions, hasMore } = await getTransactions.execute({
     page: Number(page),
     size: Number(size),
   })
@@ -21,6 +21,7 @@ transactionsRouter.get('/', multer.single, async (request, response) => {
   return response.json({
     status: 'success',
     transactions,
+    hasMore,
   })
 })
 
@@ -29,11 +30,12 @@ transactionsRouter.get(
   multer.single,
   async (request, response) => {
     const getTransactionsBalance = new GetTransactionsBalanceService()
-    const balance = await getTransactionsBalance.execute()
+    const { income, outcome } = await getTransactionsBalance.execute()
 
     return response.json({
       status: 'success',
-      balance,
+      income,
+      outcome,
     })
   }
 )
