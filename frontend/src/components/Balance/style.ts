@@ -9,7 +9,7 @@ export const Container = styled.div`
   margin-top: -5rem;
 
   @media (max-width: 600px) {
-    max-width: 80%;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

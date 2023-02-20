@@ -19,7 +19,7 @@ export const Balance = () => {
           <p>Saídas</p>
           <img src={outcomeImg} alt='Saídas' />
         </header>
-        <strong>-R$ 300,00</strong>
+        <strong>- R$ 300,00</strong>
       </div>
       <div className='total'>
         <header>
