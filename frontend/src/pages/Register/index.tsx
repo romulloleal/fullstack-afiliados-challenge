@@ -2,14 +2,15 @@ import { Link } from 'react-router-dom'
 
 import { Container } from './styled'
 
-export const Login = () => {
+export const Register = () => {
   return (
     <Container>
-      Bem vindo
+      Criar conta
+      <input type='text' placeholder='Nome' />
       <input type='email' placeholder='Email' />
       <input type='password' placeholder='Senha' />
-      <button type='submit'>Entrar</button>
-      <Link to='/register'>Criar conta</Link>
+      <button type='submit'>Criar conta</button>
+      <Link to='/login'>Voltar</Link>
     </Container>
   )
 }

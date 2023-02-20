@@ -18,10 +18,30 @@ export const GlobalStyle = createGlobalStyle`
     word-wrap: break-word;
   }
 
+  /* COLORS */
+  :root {
+    --background: #f0f2f5;
+    --red: #e52e4d;
+    --blue: #5429cc;
+    --green: #33cc95;
+
+    --blue-light: #6933ff;
+
+    --text-title: #363f5f;
+    --text-body: #969cb3;
+
+    --shape: #ffffff;
+  }
+
   button {
     background: none;
     border: none;
     cursor: pointer;
+  }
+
+  input {
+    background: none;
+    border: none;
   }
 
   [disabled] {
@@ -38,19 +58,16 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
-  /* COLORS */
-  :root {
-    --background: #f0f2f5;
-    --red: #e52e4d;
-    --blue: #5429cc;
-    --green: #33cc95;
+  a {
+    text-decoration: none;
+    color: var(--text-body);
 
-    --blue-light: #6933ff;
+    transition: filter 0.2s;
 
-    --text-title: #363f5f;
-    --text-body: #969cb3;
-
-    --shape: #ffffff;
+    &:hover {
+      /* text-decoration: underline; */
+      filter: brightness(0.7);
+    }
   }
 
   html {
