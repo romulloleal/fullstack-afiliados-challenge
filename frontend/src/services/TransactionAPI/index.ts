@@ -16,11 +16,22 @@ const getTransactionsBalance = async (): Promise<IBalance> => {
   return { income, outcome }
 }
 
-const getTransactions = async (): Promise<{
+const getTransactions = async ({
+  page,
+}: {
+  page: number
+}): Promise<{
   transactions: ITransaction[]
   hasMore: boolean
 }> => {
-  const response = await api.get(`${path}`, await getAccessToken())
+  const response = await api.get(`${path}`, {
+    params: { page, size: 20 },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem(
+        '@fullstackAfiliados:accessToken'
+      )}`,
+    },
+  })
 
   const { transactions, hasMore } = response.data
 

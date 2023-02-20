@@ -4,6 +4,11 @@ export const Container = styled.div`
   max-width: 1120px;
   margin: 0 auto;
   margin-top: 2rem;
+
+  .noTransactionsFound {
+    text-align: center;
+    color: var(--text-body);
+  }
 `
 
 export const DataTable = styled.table`
