@@ -28,7 +28,6 @@ export const Content = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
-    /* flex-direction: column; */
 
     .logout:hover {
       cursor: pointer;
