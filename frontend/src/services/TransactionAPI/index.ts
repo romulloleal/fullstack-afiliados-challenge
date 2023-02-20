@@ -43,7 +43,13 @@ const uploadTransactionFile = async ({
 }: {
   file: File
 }): Promise<ITransaction[]> => {
-  const response = await api.post(`${path}`, { file }, await getAccessToken())
+  const formData = new FormData()
+  formData.append('file', file)
+  const response = await api.post(
+    `${path}/uploadTransactionFile`,
+    formData,
+    await getAccessToken()
+  )
 
   const { transactions } = response.data
 

@@ -7,7 +7,7 @@ export const Container = styled.form`
     margin-bottom: 2rem;
   }
 
-  button[type='submit'] {
+  .sendFile {
     width: 100%;
     padding: 0 1.5rem;
     height: 4rem;

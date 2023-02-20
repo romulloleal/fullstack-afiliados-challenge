@@ -48,7 +48,7 @@ export const Login = () => {
             placeholder='Senha'
             onChange={(e) => setPasswordLogin(e.target.value)}
           />
-          <button type='submit' onClick={handleSignIn}>
+          <button type='button' onClick={handleSignIn}>
             Entrar
           </button>
           <div
@@ -78,7 +78,7 @@ export const Login = () => {
             placeholder='Senha'
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type='submit' onClick={handleSignUp}>
+          <button type='button' onClick={handleSignUp}>
             Criar conta
           </button>
           <div

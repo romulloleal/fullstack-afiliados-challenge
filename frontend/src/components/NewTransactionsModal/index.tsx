@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Modal from 'react-modal'
 
 import closeImg from '~/assets/close.svg'
+import TransactionAPI from '~/services/TransactionAPI'
 
 import FileUpload from '../FileUpload'
 
@@ -18,6 +19,14 @@ export const NewTransactionsModal = ({
   onRequestClose,
 }: NewTransactionsModalProps) => {
   const [file, setFile] = useState<File | undefined>(undefined)
+
+  const handleSendFile = async () => {
+    if (file) {
+      await TransactionAPI.uploadTransactionFile({ file })
+      setFile(undefined)
+      onRequestClose()
+    }
+  }
   return (
     <Modal
       isOpen={isOpen}
@@ -33,7 +42,9 @@ export const NewTransactionsModal = ({
       <Container>
         <h2>Cadastrar novas transações</h2>
         <FileUpload file={file} callback={setFile} />
-        <button type='submit'>Cadastrar</button>
+        <button type='button' className='sendFile' onClick={handleSendFile}>
+          Cadastrar
+        </button>
       </Container>
     </Modal>
   )

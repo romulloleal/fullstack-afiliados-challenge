@@ -20,7 +20,7 @@ export const Container = styled.div`
     padding: 0.5rem;
   }
 
-  button[type='submit'] {
+  button[type='button'] {
     width: 50%;
     padding: 0 1.5rem;
     height: 2.5rem;
