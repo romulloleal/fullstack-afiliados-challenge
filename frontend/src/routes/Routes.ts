@@ -6,7 +6,7 @@ export default [
   {
     path: '/',
     element: Home,
-    isPrivate: true,
+    // isPrivate: true,
   },
   {
     path: '/login',
