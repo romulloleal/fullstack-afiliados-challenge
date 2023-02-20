@@ -42,6 +42,7 @@ const FileUpload = ({ callback, file }: FileUploadProps) => {
           >
             <img src={trashImg} alt='Excluir arquivo' />
             Excluir arquivo
+            <span className='fileName'>{file.name}</span>
           </div>
         )}
         <input

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Modal from 'react-modal'
 
 import closeImg from '~/assets/close.svg'
+import { ITransaction } from '~/interfaces'
 import TransactionAPI from '~/services/TransactionAPI'
 
 import FileUpload from '../FileUpload'
@@ -12,17 +13,22 @@ import { Container } from './style'
 interface NewTransactionsModalProps {
   isOpen: boolean
   onRequestClose: () => void
+  addMoreTransactions: (newTransactions: ITransaction[]) => void
 }
 
 export const NewTransactionsModal = ({
   isOpen,
   onRequestClose,
+  addMoreTransactions,
 }: NewTransactionsModalProps) => {
   const [file, setFile] = useState<File | undefined>(undefined)
 
   const handleSendFile = async () => {
     if (file) {
-      await TransactionAPI.uploadTransactionFile({ file })
+      const newTransactions = await TransactionAPI.uploadTransactionFile({
+        file,
+      })
+      addMoreTransactions(newTransactions)
       setFile(undefined)
       onRequestClose()
     }

@@ -1,30 +1,20 @@
-import { useEffect, useState } from 'react'
-
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { ITransaction } from '~/interfaces'
-import TransactionAPI from '~/services/TransactionAPI'
 
 import { Container, DataBox, DataTable } from './style'
 
-export const TransactionsTable = () => {
-  const [transactions, setTransactions] = useState<ITransaction[]>([])
-  const [hasMore, setHasMore] = useState(true)
-  const [nextPage, setNextPage] = useState(1)
+interface TransactionsTableProps {
+  transactions: ITransaction[]
+  loadTransactions: () => void
+  hasMore: boolean
+}
 
-  useEffect(() => {
-    loadTransactions()
-  }, [])
-
-  const loadTransactions = async () => {
-    const response = await TransactionAPI.getTransactions({ page: nextPage })
-    setTransactions([...transactions, ...response.transactions])
-    setHasMore(response.hasMore)
-
-    if (response.hasMore) {
-      setNextPage(nextPage + 1)
-    }
-  }
+export const TransactionsTable = ({
+  transactions,
+  loadTransactions,
+  hasMore,
+}: TransactionsTableProps) => {
   return (
     <Container>
       {transactions.length === 0 ? (

@@ -16,6 +16,10 @@ export const Container = styled.div`
     img {
       width: 100px;
     }
+
+    .fileName {
+      color: var(--text-body);
+    }
   }
 
   input {
