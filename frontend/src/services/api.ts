@@ -4,11 +4,17 @@ import { useMemo } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
+import { useAuth } from '~/providers/Auth'
+
 export const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 })
 
+let refreshingToken: any
+
 const AxiosInterceptor = ({ children }: any) => {
+  const { signOut, refreshAccessToken } = useAuth()
+
   useMemo(() => {
     api.interceptors.request.use(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,6 +34,7 @@ const AxiosInterceptor = ({ children }: any) => {
         return response
       },
       async (error) => {
+        const originalConfig = error.config
         const { message } = error.response.data
         if (
           ![
@@ -38,6 +45,35 @@ const AxiosInterceptor = ({ children }: any) => {
         ) {
           toast.error(message)
         }
+
+        // logout user
+        if (
+          message === 'userUnauthorized' ||
+          message === 'expiredRefreshToken'
+        ) {
+          await signOut()
+        }
+
+        // create another token and refresh token
+        if (
+          error.response &&
+          message === 'expiredAccessToken' &&
+          !originalConfig._retry
+        ) {
+          originalConfig._retry = true
+
+          try {
+            refreshingToken = refreshingToken || refreshAccessToken()
+            const accessToken = await refreshingToken
+            refreshingToken = null
+
+            originalConfig.headers['Authorization'] = `Bearer ${accessToken}`
+            return api(originalConfig)
+          } catch (err) {
+            return Promise.reject(err)
+          }
+        }
+
         return Promise.reject(error)
       }
     )

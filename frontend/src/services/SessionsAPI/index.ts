@@ -28,7 +28,7 @@ const refreshAccessToken = async (): Promise<{
     refreshToken: localStorage.getItem('@fullstackAfiliados:refreshToken'),
   })
 
-  const { accessToken, refreshToken } = response.data
+  const { accessToken, refreshToken } = response.data.data
 
   return { accessToken, refreshToken }
 }
