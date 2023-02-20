@@ -37,4 +37,16 @@ export const Container = styled.form`
       filter: brightness(0.9);
     }
   }
+
+  .changeStep {
+    cursor: pointer;
+    color: var(--text-body);
+
+    transition: filter 0.2s;
+
+    &:hover {
+      /* text-decoration: underline; */
+      filter: brightness(0.7);
+    }
+  }
 `
