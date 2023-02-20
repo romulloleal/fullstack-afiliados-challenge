@@ -10,12 +10,30 @@ export const Content = styled.div`
 
   padding: 2rem 1rem 10rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
+  color: #fff;
 
   .title {
-    color: #fff;
     font-size: 1.5rem;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .userInformation {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    /* flex-direction: column; */
+
+    .logout:hover {
+      cursor: pointer;
+      filter: brightness(0.8);
+    }
   }
 
   button {
