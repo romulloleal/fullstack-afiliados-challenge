@@ -1,5 +1,6 @@
 import { AppDataSource } from '@database'
 import Transaction from '@entities/Transaction'
+import AppError from '@errors/AppError'
 import { NormalizeTransaction } from './NormalizeTransaction'
 
 interface Request {
@@ -10,6 +11,10 @@ class CreateTransactionsService {
   public async execute({
     file,
   }: Request): Promise<(Transaction | null | undefined)[]> {
+    if (file.mimetype !== 'text/plain') {
+      throw new AppError('Apenas arquivos de texto são permitidos!')
+    }
+
     const transactionsRepository = AppDataSource.getRepository(Transaction)
 
     const fileText = Buffer.from(file.buffer).toString('utf-8')
