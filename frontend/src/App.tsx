@@ -1,15 +1,34 @@
 import React from 'react'
 
 import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer, Flip } from 'react-toastify'
+
+import AxiosInterceptor from '~/services/api'
 
 import { GlobalStyle } from './global'
 import { Routes } from './routes'
+
+import 'react-toastify/dist/ReactToastify.css'
 
 export const App = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <Routes />
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        transition={Flip}
+      />
+      <AxiosInterceptor>
+        <Routes />
+      </AxiosInterceptor>
     </BrowserRouter>
   )
 }
