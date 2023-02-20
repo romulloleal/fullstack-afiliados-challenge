@@ -6,6 +6,7 @@ import { ToastContainer, Flip } from 'react-toastify'
 import AxiosInterceptor from '~/services/api'
 
 import { GlobalStyle } from './global'
+import AuthProvider from './providers/Auth'
 import { Routes } from './routes'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -26,9 +27,11 @@ export const App = () => {
         pauseOnHover
         transition={Flip}
       />
-      <AxiosInterceptor>
-        <Routes />
-      </AxiosInterceptor>
+      <AuthProvider>
+        <AxiosInterceptor>
+          <Routes />
+        </AxiosInterceptor>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

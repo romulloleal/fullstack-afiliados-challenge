@@ -1,7 +1,5 @@
-import { IAuthState, IUser } from '~/interfaces'
+import { IAuthState } from '~/interfaces'
 import { api } from '~/services/api'
-
-import { getAccessToken } from '../getTokens'
 
 const path = '/sessions'
 
